@@ -13,7 +13,7 @@ import rosegraphics as rg
 def main():
     """ Calls the other functions to demonstrate them. """
     run_test_draw_L()
-    run_test_draw_wall_on_right()
+    #run_test_draw_wall_on_right()
 
 
 def run_test_draw_L():
@@ -81,10 +81,32 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # -------------------------------------------------------------------------
+    y = circle.center.y
+    x = circle.center.x
+    radius = circle.radius
 
+    for k in range(r):
+        for j in range(3):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.attach_to(window)
+            new_circle.fill_color = circle.fill_color
+            window.render(0.1)
+            x = x+2*radius
+        y = y + 2*radius
+        x = circle.center.x
+
+    for k in range(3):
+        for j in range(c+3):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.attach_to(window)
+            new_circle.fill_color = circle.fill_color
+            window.render(0.1)
+            x = x + 2 * radius
+        y = y + 2 * radius
+        x = circle.center.x
 
 def run_test_draw_wall_on_right():
     """ Tests the    draw_wall_on_right    function. """
@@ -122,9 +144,32 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # -------------------------------------------------------------------------
+    x1 =rectangle.corner_1.x
+    y1 =rectangle.corner_1.y
+
+    x2 = rectangle.corner_2.x
+    y2 = rectangle.corner_2.y
+
+    dy = y1 - y2
+    dx = x1-x2
+
+    for k in range(n):
+
+        for j in range(n-k):
+            new_rectangle = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+            new_rectangle.fill_color=rectangle.fill_color
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+            y1 = y1 - dy
+            y2 = y2 - dy
+
+        y1 = rectangle.corner_1.y
+        y2 = rectangle.corner_2.y
+        x1 = x1 +dx
+        x2 = x2 +dx
 
 
 # -----------------------------------------------------------------------------
